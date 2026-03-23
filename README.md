@@ -77,6 +77,8 @@ return 0;
 
 ## Output:
 
+<img width="359" height="198" alt="image" src="https://github.com/user-attachments/assets/2d5c0ac1-eccc-44be-9068-19717c210ca3" />
+
 
 
 ## Result:
