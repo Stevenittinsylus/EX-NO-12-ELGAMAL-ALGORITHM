@@ -1,4 +1,4 @@
-# EX-NO-12-ELGAMAL-ALGORITHM
+0# EX-NO-12-ELGAMAL-ALGORITHM
 
 ## AIM:
 To Implement ELGAMAL ALGORITHM
@@ -24,6 +24,7 @@ To Implement ELGAMAL ALGORITHM
 6. Security: The security of the ElGamal algorithm relies on the difficulty of solving the discrete logarithm problem in a large prime field, making it secure for encryption.
 
 ## Program:
+```
 #include <stdio.h>
 
 long long mod(long long b,long long e,long long m){
@@ -53,7 +54,6 @@ int main(){
 
     return 0;
 }
-
 
 ```
 
