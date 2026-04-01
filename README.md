@@ -24,52 +24,35 @@ To Implement ELGAMAL ALGORITHM
 6. Security: The security of the ElGamal algorithm relies on the difficulty of solving the discrete logarithm problem in a large prime field, making it secure for encryption.
 
 ## Program:
-```
-#include <stdio.h> 
-#include <math.h> 
- 
-// Function to compute modular exponentiation (base^exp % mod) 
-long long int modExp(long long int base, long long int exp, long long int mod) { 
-  long long int result = 1; 
-  while (exp > 0) { 
-      if (exp % 2 == 1) { 
-          result = (result * base) % mod; 
-      } 
-      base = (base * base) % mod; 
-      exp = exp / 2; 
-  } 
-  return result; 
-} 
- 
-int main() { 
-  long long int p, g, privateKeyA, publicKeyA; 
-  long long int k, message, c1, c2, decryptedMessage; 
- 
-  // Step 1: Input a large prime number (p) and a generator (g) 
-  printf("Enter a large prime number (p): "); 
-scanf("%lld", &p); 
-printf("Enter a generator (g): "); 
-scanf("%lld", &g); 
-// Step 2: Alice inputs her private key 
-printf("Enter Alice's private key: "); 
-scanf("%lld", &privateKeyA); 
-// Step 3: Compute Alice's public key (publicKey = g^privateKeyA mod p) 
-publicKeyA = modExp(g, privateKeyA, p); 
-printf("Alice's public key: %lld\n", publicKeyA); 
-// Step 4: Bob inputs the message to be encrypted and selects a random k 
-printf("Enter the message to encrypt (as a number): "); 
-scanf("%lld", &message); 
-printf("Enter a random number k: "); 
-scanf("%lld", &k); 
-// Step 5: Bob computes ciphertext (c1 = g^k mod p, c2 = (message * publicKeyA^k) mod p) 
-c1 = modExp(g, k, p); 
-c2 = (message * modExp(publicKeyA, k, p)) % p; 
-printf("Encrypted message (c1, c2): (%lld, %lld)\n", c1, c2); 
-// Step 6: Alice decrypts the message (decryptedMessage = (c2 * c1^(p-1-privateKeyA)) mod p) 
-decryptedMessage = (c2 * modExp(c1, p - 1 - privateKeyA, p)) % p; 
-printf("Decrypted message: %lld\n", decryptedMessage); 
-return 0; 
-} 
+#include <stdio.h>
+
+long long mod(long long b,long long e,long long m){
+    long long r=1;
+    while(e){
+        if(e&1) r=r*b%m;
+        b=b*b%m;
+        e>>=1;
+    }
+    return r;
+}
+
+int main(){
+    long long p,g,a,A,k,m,c1,c2,d;
+
+    printf("p,g,a,m,k: ");
+    scanf("%lld%lld%lld%lld%lld",&p,&g,&a,&m,&k);
+
+    A = mod(g,a,p);
+
+    c1 = mod(g,k,p);
+    c2 = m * mod(A,k,p) % p;
+
+    d = c2 * mod(c1,p-1-a,p) % p;
+
+    printf("Pub:%lld\nEnc:(%lld,%lld)\nDec:%lld\n",A,c1,c2,d);
+
+    return 0;
+}
 
 
 ```
